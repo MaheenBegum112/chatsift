@@ -2,7 +2,7 @@
 
 Chatsift is a student-friendly web application for querying exported WhatsApp class group chats. Students export their group chat as a `.txt` file, upload it, and ask natural language questions (e.g., *"When is the DBMS assignment due?"*). Chatsift answers using only the uploaded chat and displays the exact source messages cited for the answer. If the answer is not present in the chat, it clearly states that instead of guessing.
 
-This repository contains **only the frontend** of Chatsift, built with React, Vite, and Tailwind CSS v4. It features a complete mock API layer for standalone development and testing, and can be switched to a real backend via environment variables.
+The frontend is styled in a clean, modern SaaS design (inspired by **XportConnect**), featuring a dedicated landing page, student authentication modal (with 1-click demo sign-in), authenticated upload workflow, and interactive Q&A citations dashboard.
 
 ---
 
@@ -12,30 +12,28 @@ This repository contains **only the frontend** of Chatsift, built with React, Vi
 - **Bundler & Dev Server**: Vite
 - **Styling**: Tailwind CSS v4 (`@tailwindcss/vite`, no legacy configs or postcss)
 - **Language**: Plain JavaScript (no TypeScript)
-- **State Management**: React state only (Chat data is strictly in-memory and is **never** saved to `localStorage` or `sessionStorage`).
+- **State Management**: React state only (Chat data and credentials are strictly in-memory and are **never** saved to `localStorage` or `sessionStorage`).
 
 ---
 
-## Project Structure
+## User Flow & Structure
 
-```text
-chatsift/
-├── index.html
-├── package.json
-├── vite.config.js
-├── README.md
-└── src/
-    ├── api.js                 # The ONLY file that talks to the backend (mock + real)
-    ├── App.jsx                # Holds app state and switches between views
-    ├── index.css              # @import "tailwindcss";
-    ├── main.jsx               # React entry point
-    └── components/
-        ├── UploadView.jsx     # Export guide, drag-and-drop file picker, consent, upload
-        ├── AskView.jsx        # Question input, example chips, thread, delete dialog
-        ├── AnswerCard.jsx     # Card rendering found answers, not-found state, and errors
-        ├── SourceList.jsx     # Collapsible cited messages with sender and time
-        └── ConsentNotice.jsx  # Privacy policy and WhatsApp disclaimer
-```
+1. **Home / Landing Page (`LandingView`)**:
+   - Pure marketing/showcase landing page matching the XportConnect design.
+   - Clean top navbar with `Home`, `About`, `→] Login`, and `+ Register` buttons.
+   - Centered hero with globe badge icon, 2-line headline (*"Class Chats Made Simple & Secure"*), subtitle, and CTA buttons (*"Get Started Free"* & *"How It Works"*).
+   - "Three Steps to Sift Your Class Chat" section.
+   - Floating chat action button in the bottom right corner.
+2. **Student Authentication (`AuthModal`)**:
+   - Clean dialog supporting **Sign In** and **Sign Up** tabs.
+   - Includes a **"1-Click Demo Student Sign In"** button for immediate access without typing credentials.
+3. **Upload Screen (`UploadView`)**:
+   - Shown after sign-in: provides WhatsApp export guidance (without media), drag-and-drop `.txt` file picker (up to 10 MB), consent checkbox, and `ConsentNotice`.
+4. **Q&A Citations Dashboard (`AskView`)**:
+   - Top 3 stat cards: `Total Messages`, `Semantic Chunks`, and `Session Status`.
+   - Question input with Enter key support and 3 clickable suggestion chips.
+   - Conversation thread showing `AnswerCard` with collapsible `SourceList` ("Cited from your chat") citing sender and timestamp.
+   - Data deletion confirmation dialog.
 
 ---
 

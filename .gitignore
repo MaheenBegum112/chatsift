@@ -1,1 +1,15 @@
-node_modules/ 
+# Python
+venv/
+__pycache__/
+.pytest_cache/
+
+# Secrets
+.env
+
+# Frontend
+node_modules/
+dist/
+
+# Real chat exports (other people's messages)
+*.txt
+!requirements.txt

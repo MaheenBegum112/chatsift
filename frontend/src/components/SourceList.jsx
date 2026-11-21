@@ -1,5 +1,5 @@
 // src/components/SourceList.jsx
-// Collapsible list of source chat messages backing an answer.
+// Collapsible list of source chat messages backing an answer, in clean blue SaaS style.
 
 import { useState } from 'react';
 
@@ -25,17 +25,10 @@ export default function SourceList({ sources = [] }) {
   const [isExpanded, setIsExpanded] = useState(sources.length <= 3);
 
   return (
-    <div className="mt-4 pt-3 border-t border-slate-100">
-      <div className="flex items-center justify-between text-xs font-medium text-slate-500 mb-2">
-        <span className="flex items-center gap-1.5 font-semibold text-slate-700">
-          <svg
-            className="w-3.5 h-3.5 text-violet-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-            aria-hidden="true"
-          >
+    <div className="mt-5 pt-4 border-t border-gray-100">
+      <div className="flex items-center justify-between text-xs font-medium text-gray-500 mb-3">
+        <span className="flex items-center gap-2 font-bold text-gray-800">
+          <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -48,7 +41,7 @@ export default function SourceList({ sources = [] }) {
         <button
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-violet-600 hover:text-violet-700 font-medium text-xs focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-1 rounded px-1.5 py-0.5 transition-colors cursor-pointer"
+          className="text-xs text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200"
           aria-expanded={isExpanded}
         >
           {isExpanded ? 'Hide sources' : `Show ${sources.length} sources`}
@@ -56,20 +49,20 @@ export default function SourceList({ sources = [] }) {
       </div>
 
       {isExpanded && (
-        <div className="space-y-2 mt-2">
+        <div className="space-y-2.5 mt-2">
           {sources.map((src, idx) => (
             <div
               key={idx}
-              className="rounded-lg bg-slate-50 border border-slate-200/80 p-3 text-xs text-slate-700 transition-colors"
+              className="rounded-xl bg-gray-50 border border-gray-100 p-3.5 text-xs text-gray-700 transition"
             >
-              <div className="flex items-center justify-between mb-1 text-[11px] text-slate-500">
-                <span className="font-semibold text-violet-700 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-violet-500 inline-block"></span>
+              <div className="flex items-center justify-between mb-1.5 text-[11px] text-gray-400">
+                <span className="font-bold text-blue-700 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-blue-600 inline-block"></span>
                   {src.sender || 'Group Member'}
                 </span>
                 {src.time && <span>{formatTimestamp(src.time)}</span>}
               </div>
-              <p className="text-slate-800 font-mono text-[11.5px] whitespace-pre-wrap bg-white/80 rounded p-2 border border-slate-100">
+              <p className="text-gray-800 font-mono text-[12px] whitespace-pre-wrap bg-white rounded-lg p-2.5 border border-gray-200/80 shadow-2xs">
                 "{src.text}"
               </p>
             </div>
